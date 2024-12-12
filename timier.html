@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="timier.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timier</title>
+</head>
+
+<body>
+    <div id="mainbox">
+        <div id="displaytime">
+            00:00:00
+
+        </div>
+        <div id="button">
+            <button type="button" id="Restartbtn" style="background-color: blue;">Reset</button>
+            <button type="button" id="stopbtn" style="background-color:#840d0d;">Stop</button>
+            <button type="button" id="Startbtn" style="background-color: green;">Start</button>
+        </div>
+
+    </div>
+    <script>
+        let resbtn = document.getElementById("Restartbtn")
+        let stopbtn = document.getElementById("stopbtn")
+        let startbtn = document.getElementById("Startbtn")
+
+
+        let msec = 0;
+        let seco = 0;
+        let min = 0;
+
+        let timerid = null;
+
+        Startbtn.addEventListener('click', function () {
+            // msec++
+            // console.log(msec);
+            if (timerid != "null") {
+                clearInterval(timerid)
+            }
+            timerid = setInterval(timer, 10)
+
+
+        })
+        stopbtn.addEventListener('click', function () {
+            clearInterval(timerid)
+
+        })
+        Restartbtn.addEventListener('click', function () {
+            clearInterval(timerid)
+            // alert("helo")
+            displaytime.innerHTML = "00: 00: 00";
+            msec = 0;
+            seco = 0;
+            min = 0;
+
+
+
+
+        })
+
+
+        function timer() {
+            msec++
+            if (msec == "100") {
+                msec = 0;
+                seco++
+                if (seco == "60") {
+                    seco = 0;
+                    min++
+                    // console.log(min);
+                }
+
+            }
+        let msecval=(msec < "10") ? `0${msec}`: `${msec}`
+        let secval=(seco < "10") ? `0${seco}`: `${seco}`
+        let minval=(min < "10") ? `0${min}`: `${min}`
+   
+        displaytime.innerHTML = `${minval} : ${secval} : ${msecval}`
+
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>
